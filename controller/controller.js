@@ -17,6 +17,18 @@ export const checkOut = async (req, res) => {
 
 
 export const paymentVerification = (req, res) => {
-   res.status(200).send('YOUR ORDER HAS BEEN PLACED SUCCESSFULLY')
+    console.log(req.body);
+    const {razorpay_payment_id, razorpay_order_id, razorpay_signature } = req.body
+    const body = razorpay_order_id + '|' + razorpay_payment_id
+
+    const expectedSignature = crypto
+        .createHmac("sha256", process.env.RAZORPAY_API_SECRET)
+        .update(body.toString())
+        .digest("hex")
+
+    if(expectedSignature == razorpay_signature){
+        res.redirect(`https://healthyme-sit-kewal25.firebaseapp.com/paymentsuccess?reference=${razorpay_order_id}`)
+        //res.status(200).json({msg:true})
+    }   
 }
 

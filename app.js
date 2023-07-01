@@ -13,6 +13,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true }));
 
+app.use('/',(req,res)=>{
+    res.status(200).send('Welcome to Razorpay-NodeJs Payment Gateway Integration');
+})
 app.use('/api', router);
 app.use('/api/getkey', (req, res)=>{
     res.status(200).json({key:process.env.RAZORPAY_API_KEY})
