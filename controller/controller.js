@@ -27,7 +27,7 @@ export const paymentVerification = (req, res) => {
         .digest("hex")
 
     if(expectedSignature == razorpay_signature){
-        res.redirect(`https://healthyme-sit-kewal25.firebaseapp.com/paymentsuccess?reference=${razorpay_order_id}`)
+        res.redirect(`https://healthyme.kewalkhondekar.dev/paymentsuccess?reference=${razorpay_order_id}`)
         //res.status(200).json({msg:true})
     }   
 }
